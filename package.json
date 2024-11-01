@@ -1,0 +1,12 @@
+{
+  "name": "shine_bright",
+  "version": "1.0.0",
+  "description": "Shine Bright - A complete cleaning service",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prabesh",
+  "license": "MIT"
+}
