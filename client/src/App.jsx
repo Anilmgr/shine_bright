@@ -13,6 +13,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 import "./App.css";
 import BookingForm from "./pages/BookingForm";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
             {
                 path: "booking",
                 element: <BookingForm/>
-            }
+            },
+            {
+                path: "contact-us",
+                element: <Contact/>
+            },
         ],
     },
 ]);
