@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 import "./App.css";
+import BookingForm from "./pages/BookingForm";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "testimonials",
                 element: <Testimonial/>
+            },
+            {
+                path: "booking",
+                element: <BookingForm/>
             }
         ],
     },

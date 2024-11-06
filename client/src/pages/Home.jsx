@@ -5,13 +5,14 @@ import { FaHeart, FaStar, FaUserCheck } from "react-icons/fa";
 import residential from "../assets/images/residential-cleaning.jpg"
 import commercial from "../assets/images/commercial-cleaning.jpg"
 import deep from "../assets/images/deep-cleaning.jpg"
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <Header />
+      <Header title="Professional Cleaning Services" subTitle="Let us make your space shine bright!" btn={true}/>
       <main>
         <section className="features py-5">
             <div className="container">
@@ -89,7 +90,7 @@ const Home = () => {
         <section className="cta py-5">
             <div className="container text-center">
                 <h2 className="mb-4">Ready to experience the Shine Bright difference?</h2>
-                <a href="booking.html" className="btn btn-primary-custom  btn-lg">Book Your Cleaning Today</a>
+                <Link to='/booking' className="btn btn-primary-custom  btn-lg">Book Your Cleaning Today</Link>
             </div>
         </section>
     </main>
