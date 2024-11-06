@@ -1,42 +1,77 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Custom styles for Shine Bright Cleaning */
+
+body {
+  font-family: 'Arial', sans-serif;
+  padding-top: 56px; /* Adjust for fixed navbar */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.navbar-brand img {
+  max-height: 60px;
+  margin-right: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.hero-section, .page-header {
+  background: rgb(0,98,163);
+background: linear-gradient(180deg, rgba(0,98,163,1) 0%, rgba(22,140,219,1) 35%, rgb(26, 183, 246) 100%);
+  color: white;
+  padding: 100px 0;
+}
+
+.hero-section h1, .page-header h1 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.features .card, .our-values .card {
+  border: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.features .card:hover, .our-values .card:hover {
+  transform: translateY(-10px);
+}
+
+.services .card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials .card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta {
+  background-color: #f8f9fa;
+}
+
+.contact-form form {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+footer {
+  background-color: #343a40;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section, .page-header {
+      padding: 60px 0;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.btn-primary-custom {
+  background-color: #0171bc;
+  color: #ffffff;
 }
 
-.card {
-  padding: 2em;
+.btn-primary-custom:hover{
+  background-color: #0171bcd7;
+  color: #ffffff;
 }
 
-.read-the-docs {
-  color: #888;
+a{
+  text-decoration: none;
 }
