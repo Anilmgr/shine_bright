@@ -2,6 +2,7 @@ import { body, param, validationResult } from "express-validator";
 import { BadRequestError, NotFoundError, UnauthorizedError } from "../errors/customError.js";
 import { SERVICE_TYPE } from "../utils/constants.js";
 import Booking from "../models/BookingModel.js";
+import mongoose from "mongoose";
 
 
 const withValidationErrors = (validateValues) => {
@@ -75,8 +76,5 @@ export const validateIdParam = withValidationErrors([
         if (!isValidId) throw new "Invalid MongoDB ID!"();
         const booking = await Booking.findById(value);
         if (!booking) throw new NotFoundError("Booking not found!");
-        const isAdmin = req.user.role === USER_ROLE.ADMIN
-        const isOwner = req.user.userId === booking.createdBy.toString()
-        if(!isAdmin && !isOwner) throw new UnauthorizedError("Not authorized to access this route!");
     }),
 ]);
