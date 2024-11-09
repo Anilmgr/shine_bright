@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Shine Bright - A complete cleaning service",
     "main": "app.js",
+    "type": "module",
     "scripts": {
         "setup": "npm install && cd client && npm install",
         "server": "nodemon app.js",
@@ -16,10 +17,16 @@
         "bcryptjs": "^2.4.3",
         "dotenv": "^16.4.5",
         "express": "^4.21.1",
-        "http-status-codes": "^2.3.0"
+        "express-async-errors": "3.1.1",
+        "express-mongo-sanitize": "2.2.0",
+        "express-rate-limit": "6.8.0",
+        "express-validator": "7.0.1",
+        "http-status-codes": "^2.3.0",
+        "mongoose": "^8.8.1"
     },
     "devDependencies": {
         "concurrently": "^9.0.1",
+        "morgan": "1.10.0",
         "nodemon": "^3.1.7"
     }
 }
