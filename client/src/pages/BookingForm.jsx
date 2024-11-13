@@ -1,6 +1,21 @@
-import Footer from "../components/Footer"
-import Header from "../components/Header"
-import Navbar from "../components/Navbar"
+import { Form } from "react-router-dom";
+import { SERVICE_TYPE } from "../../../utils/constants";
+import customFetch from "../../utils/customFetch";
+import {Footer, FormRow, FormRowSelect, Header, Navbar, SubmitBtn} from "../components";
+import { toast } from "react-toastify";
+
+export const action = async ({ request }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+    try {
+        await customFetch.post("/bookings", data);
+        toast.success("Booking made successfully!");
+        return null;
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
+        return error;
+    }
+};
 
 const BookingForm = () => {
   return (
@@ -12,46 +27,23 @@ const BookingForm = () => {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
-                        <form id="booking-form">
-                            <div className="mb-3">
-                                <label for="name" className="form-label">Name</label>
-                                <input type="text" className="form-control" id="name" name="name" required />
-                            </div>
-                            <div className="mb-3">
-                                <label for="email" className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" name="email" required />
-                                </div>
+                        <Form id="booking-form" method="post" className="form">
+                            <FormRow type="text" name="name"/>
+                            <FormRow type="email" name="email"/>
+                            <FormRow type="tel" name="phone"/>
+                                <FormRowSelect name="serviceType" list={Object.values(SERVICE_TYPE)} labelText="Service Type"/>
+                                <FormRow type="date" name="preferredDate" labelText="Preferred Date"/>
+                                <FormRow type="time" name="preferredTime" labelText="Preferred Time"/>
                                 <div className="mb-3">
-                                    <label for="phone" className="form-label">Phone</label>
-                                    <input type="tel" className="form-control" id="phone" name="phone" required />
-                                </div>
-                                <div className="mb-3">
-                                    <label for="service" className="form-label">Service Type</label>
-                                    <select className="form-select" id="service" name="service" required>
-                                        <option value="">Select a service</option>
-                                        <option value="residential">Residential Cleaning</option>
-                                        <option value="commercial">Commercial Cleaning</option>
-                                        <option value="deep">Deep Cleaning</option>
-                                    </select>
-                                </div>
-                                <div className="mb-3">
-                                    <label for="date" className="form-label">Preferred Date</label>
-                                    <input type="date" className="form-control" id="date" name="date" required />
-                                </div>
-                                <div className="mb-3">
-                                    <label for="time" className="form-label">Preferred Time</label>
-                                    <input type="time" className="form-control" id="time" name="time" required />
-                                </div>
-                                <div className="mb-3">
-                                    <label for="address" className="form-label">Address</label>
+                                    <label htmlFor="address" className="form-label">Address</label>
                                     <textarea className="form-control" id="address" name="address" rows="3" required></textarea>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="notes" className="form-label">Special Instructions (Optional)</label>
+                                    <label htmlFor="notes" className="form-label">Special Instructions (Optional)</label>
                                     <textarea className="form-control" id="notes" name="notes" rows="3"></textarea>
                                 </div>
-                                <button type="submit" className="btn btn-primary-custom">Book Now</button>
-                            </form>
+                                <SubmitBtn formBtn />
+                            </Form>
                         </div>
                     </div>
                 </div>

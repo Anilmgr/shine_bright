@@ -1,31 +1,33 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.Schema({
+// Utility function to validate phone numbers (can be extended for different formats)
+const phoneValidator = (v) => /^\d{10}$/.test(v);
+
+const bookingSchema = new mongoose.Schema(
+  {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Name is required'],
       trim: true,
     },
     email: {
       type: String,
-      required: true,
+      required: [true, 'Email is required'],
       trim: true,
       lowercase: true,
       validate: {
         validator: function (v) {
           return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
         },
-        message: props => `${props.value} is not a valid email!`
+        message: (props) => `${props.value} is not a valid email!`,
       },
     },
     phone: {
       type: String,
-      required: true,
+      required: [true, 'Phone number is required'],
       validate: {
-        validator: function (v) {
-          return /^\d{10}$/.test(v);
-        },
-        message: props => `${props.value} is not a valid phone number!`
+        validator: phoneValidator,
+        message: (props) => `${props.value} is not a valid phone number!`,
       },
     },
     serviceType: {
@@ -36,7 +38,7 @@ const bookingSchema = new mongoose.Schema({
     },
     preferredDate: {
       type: Date,
-      required: true,
+      required: [true, 'Preferred date is required'],
       validate: {
         validator: function (date) {
           return date >= new Date();
@@ -46,17 +48,17 @@ const bookingSchema = new mongoose.Schema({
     },
     preferredTime: {
       type: String,
-      required: true,
+      required: [true, 'Preferred time is required'],
       validate: {
         validator: function (time) {
-          return /^([01]\d|2[0-3]):[0-5]\d$/.test(time); // Validates time in HH:mm format
+          return /^([01]\d|2[0-3]):[0-5]\d$/.test(time);
         },
         message: 'Preferred time must be in HH:mm format (e.g., 14:30).',
       },
     },
     address: {
       type: String,
-      required: true,
+      required: [true, 'Address is required'],
       trim: true,
     },
     specialInstructions: {
@@ -64,11 +66,24 @@ const bookingSchema = new mongoose.Schema({
       trim: true,
     },
     bookingStatus: {
-        type: String,
-        enum: ["unconfirmed", "confirmed", "processing", "finished"],
-        default: "unconfirmed",
-        required: true,
-      },
-  }, { timestamps: true });
+      type: String,
+      enum: ["unconfirmed", "confirmed", "processing", "finished"],
+      default: "unconfirmed",
+      required: true,
+    },
+    statusUpdatedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
 
-  export default mongoose.model('Booking', bookingSchema);
+bookingSchema.pre('save', function (next) {
+  if (this.isModified('bookingStatus')) {
+    this.statusUpdatedAt = Date.now();
+  }
+  next();
+});
+
+export default mongoose.model('Booking', bookingSchema);
