@@ -19,9 +19,9 @@ const Footer = () => {
                 <div className="col-md-4 mb-3">
                     <h5>Contact Us</h5>
                     <address>
-                        123 Clean Street<br/>
-                        Sparkle City, SC 12345<br/>
-                        Phone: (555) 123-4567<br/>
+                        12 east St<br/>
+                        Granville NSW 2142<br/>
+                        Phone: +61 435214161<br/>
                         Email: info@shinebrightcleaning.com
                     </address>
                 </div>
