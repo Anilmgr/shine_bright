@@ -3,6 +3,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import bookingRouter from "./routes/bookingRouter.js"
 import morgan from "morgan";
+import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 
 const app = express();
 
@@ -14,6 +15,8 @@ if (process.env.NODE_ENV === "development") {
 
 // Routers
 app.use("/api/v1/bookings", bookingRouter);
+
+app.use(errorHandlerMiddleware);
 
 const PORT = process.env.PORT || 3000;
 

@@ -12,6 +12,8 @@ export const action = async ({ request }) => {
         toast.success("Booking made successfully!");
         return null;
     } catch (error) {
+        console.log(error);
+        
         toast.error(error?.response?.data?.message);
         return error;
     }
