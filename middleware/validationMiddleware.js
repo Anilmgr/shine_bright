@@ -3,6 +3,7 @@ import { BadRequestError, NotFoundError, UnauthorizedError } from "../errors/cus
 import { SERVICE_TYPE } from "../utils/constants.js";
 import Booking from "../models/BookingModel.js";
 import mongoose from "mongoose";
+import User from "../models/UserModel.js";
 
 
 const withValidationErrors = (validateValues) => {
@@ -77,4 +78,52 @@ export const validateIdParam = withValidationErrors([
         const booking = await Booking.findById(value);
         if (!booking) throw new NotFoundError("Booking not found!");
     }),
+]);
+
+export const validateUserInput = withValidationErrors([
+    body("name").notEmpty().withMessage("Name is required!"),
+    body("email")
+        .notEmpty()
+        .withMessage("Email is required!")
+        .isEmail()
+        .withMessage("Invalid email format")
+        .custom(async (email) => {
+            const user = await User.findOne({ email });
+            if (user) throw new BadRequestError("Email already exist!");
+        }),
+    body("password")
+        .notEmpty()
+        .withMessage("Password is required!")
+        .isLength({ min: 8 })
+        .withMessage("Password must be at least 8 character!"),
+    body("location").notEmpty().withMessage("Location is required!"),
+    body("lastName").notEmpty().withMessage("Last Name is required!"),
+]);
+
+export const validateLoginInput = withValidationErrors([
+    body("email")
+        .notEmpty()
+        .withMessage("Email is required!")
+        .isEmail()
+        .withMessage("Invalid email format"),
+    body("password")
+        .notEmpty()
+        .withMessage("Password is required!")
+        .isLength({ min: 8 })
+        .withMessage("Password must be at least 8 character!"),
+]);
+
+export const validateUpdateUserInput = withValidationErrors([
+    body("name").notEmpty().withMessage("Name is required!"),
+    body("email")
+        .notEmpty()
+        .withMessage("Email is required!")
+        .isEmail()
+        .withMessage("Invalid email format")
+        .custom(async (email, {req}) => {
+            const user = await User.findOne({ email });
+            if (user && user._id.toString() !== req.user.userId) throw new BadRequestError("Email already exist!");
+        }),
+    body("location").notEmpty().withMessage("Location is required!"),
+    body("lastName").notEmpty().withMessage("Last Name is required!"),
 ]);

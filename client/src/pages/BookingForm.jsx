@@ -1,8 +1,9 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 import { SERVICE_TYPE } from "../../../utils/constants";
-import customFetch from "../../utils/customFetch";
 import {Footer, FormRow, FormRowSelect, Header, Navbar, SubmitBtn} from "../components";
 import { toast } from "react-toastify";
+import { useEffect, useRef } from "react";
+import customFetch from "../utils/customFetch";
 
 export const action = async ({ request }) => {
     const formData = await request.formData();
@@ -10,16 +11,27 @@ export const action = async ({ request }) => {
     try {
         await customFetch.post("/bookings", data);
         toast.success("Booking made successfully!");
-        return null;
+        return { success: true };
     } catch (error) {
-        console.log(error);
-        
         toast.error(error?.response?.data?.message);
-        return error;
+        return { success: false, error };
     }
 };
 
 const BookingForm = () => {
+    const actionData = useActionData();
+    const navigation = useNavigation();
+    const formRef = useRef(null);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+    useEffect(() => {
+      if (actionData?.success && navigation.state === 'idle') {
+        formRef.current.reset();
+        scrollToTop();
+      }
+    }, [actionData, navigation.state]);
   return (
     <>
         <Navbar/>
@@ -29,7 +41,7 @@ const BookingForm = () => {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
-                        <Form id="booking-form" method="post" className="form">
+                        <Form id="booking-form" method="post" className="form" ref={formRef}>
                             <FormRow type="text" name="name"/>
                             <FormRow type="email" name="email"/>
                             <FormRow type="tel" name="phone"/>

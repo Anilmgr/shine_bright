@@ -32,7 +32,7 @@ const Navbar = () => {
                         <Link className="nav-link" to="/contact-us">Contact</Link>
                     </li>
                     <li className="nav-item">
-                    <Link to='/booking' className="nav-link btn btn-primary-custom  text-white">Book Now</Link>
+                    <Link to='/booking' className="nav-link btn btn-primary-custom  text-white m-0">Book Now</Link>
                     </li>
                 </ul>
             </div>

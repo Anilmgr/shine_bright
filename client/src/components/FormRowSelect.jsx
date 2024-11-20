@@ -1,6 +1,6 @@
 const FormRowSelect = ({name, labelText, list, defaultValue = "", onChange}) => {
   return (
-      <div className="form-row mb-3">
+      <div className="form-row">
           <label htmlFor="name" className="form-label text-capitalize">
               {labelText || name}
           </label>

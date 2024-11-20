@@ -2,7 +2,7 @@ import Booking from "../models/BookingModel.js";
 import { StatusCodes } from "http-status-codes";
 
 export const getAllBookings = async (req, res) => {
-    const { search, serviceType, sort } = req.query;
+    const { search, serviceType, bookingStatus, sort } = req.query;
     const queryObject = {};
     if (search) {
         queryObject.$or = [
@@ -12,6 +12,10 @@ export const getAllBookings = async (req, res) => {
     }
     if (serviceType && serviceType !== "all") {
         queryObject.serviceType = serviceType;
+    }
+
+    if (bookingStatus && bookingStatus !== "all") {
+        queryObject.bookingStatus = bookingStatus;
     }
 
     const sortOptions = {

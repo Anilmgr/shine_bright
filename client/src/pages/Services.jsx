@@ -4,6 +4,7 @@ import residential from "../assets/images/residential-cleaning.jpg"
 import commercial from "../assets/images/commercial-cleaning.jpg"
 import deep from "../assets/images/deep-cleaning.jpg"
 import { Header } from "../components"
+import { Link } from "react-router-dom"
 
 const Services = () => {
   return (
@@ -27,7 +28,7 @@ const Services = () => {
                             <li>Move-in/move-out cleaning</li>
                             <li>Spring cleaning</li>
                         </ul>
-                        <a href="booking.html" className="btn btn-primary-custom">Book Residential Cleaning</a>
+                        <Link to="/booking" className="btn btn-primary-custom">Book Residential Cleaning</Link>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,7 @@ const Services = () => {
                             <li>Medical facility cleaning</li>
                             <li>Industrial cleaning</li>
                         </ul>
-                        <a href="booking.html" className="btn btn-primary-custom">Book Commercial Cleaning</a>
+                        <Link to="/booking" className="btn btn-primary-custom">Book Commercial Cleaning</Link>
                     </div>
                 </div>
             </div>
@@ -71,7 +72,7 @@ const Services = () => {
                             <li>Inside cabinets and drawers</li>
                             <li>Window cleaning (interior)</li>
                         </ul>
-                        <a href="booking.html" className="btn btn-primary-custom">Book Deep Cleaning</a>
+                        <Link to="/booking" className="btn btn-primary-custom">Book Deep Cleaning</Link>
                     </div>
                 </div>
             </div>
