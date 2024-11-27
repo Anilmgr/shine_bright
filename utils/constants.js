@@ -1,3 +1,4 @@
+
 export const SERVICE_TYPE = {
     COMMERCIAL: "commercial",
     RESIDENTIAL: "residential",
@@ -17,3 +18,5 @@ export const BOOKING_STATUS = {
    PROCESSING :"processing", 
    FINISHED :"finished"
 };
+
+export const API_URI = "http://localhost:3000/";

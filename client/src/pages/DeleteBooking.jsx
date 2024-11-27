@@ -11,12 +11,12 @@ export const action = async ({ request, params }) => {
   } catch (error) {
       toast.error(error?.response?.data?.message);
   }
-  return redirect('/dashboard/all-bookings');
+  return redirect('/dashboard');
 };
 
-const DeleteJob = () => {
+const DeleteBooking = () => {
   return (
-    <div>DeleteJob</div>
+    <div>DeleteBooking</div>
   )
 }
-export default DeleteJob
+export default DeleteBooking

@@ -1,4 +1,4 @@
-import { Form, useActionData, useNavigation } from "react-router-dom";
+import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { SERVICE_TYPE } from "../../../utils/constants";
 import { FormRow, FormRowSelect, SubmitBtn } from "../components";
@@ -46,24 +46,36 @@ const AddBooking = () => {
                                 className="form"
                                 ref={formRef}
                             >
-                                <FormRow type="text" name="name" />
-                                <FormRow type="email" name="email" />
-                                <FormRow type="tel" name="phone" />
+                                <div className="form-row mb-3">
+                                    <FormRow type="text" name="name" />
+                                </div>
+                                <div className="form-row mb-3">
+                                    <FormRow type="email" name="email" />
+                                </div>
+                                <div className="form-row mb-3">
+                                    <FormRow type="tel" name="phone" />
+                                </div>
+                                <div className="form-row mb-3">
                                 <FormRowSelect
                                     name="serviceType"
                                     list={Object.values(SERVICE_TYPE)}
                                     labelText="Service Type"
                                 />
+                                </div>
+                                <div className="form-row mb-3">
                                 <FormRow
                                     type="date"
                                     name="preferredDate"
                                     labelText="Preferred Date"
                                 />
+                                </div>
+                                <div className="form-row mb-3">
                                 <FormRow
                                     type="time"
                                     name="preferredTime"
                                     labelText="Preferred Time"
                                 />
+                                </div>
                                 <div className="mb-3">
                                     <label
                                         htmlFor="address"

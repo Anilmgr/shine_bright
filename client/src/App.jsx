@@ -9,29 +9,43 @@ import "./App.css";
 import BookingForm, { action as bookingAction } from "./pages/BookingForm";
 import {
     AboutUs,
+    AddBlog,
+    AllBlogs,
     AllBookings,
+    AllServices,
     Blog,
     Contact,
 
     DashboardLayout,
     EditBooking,
+    EditTestimonial,
     Error,
     Home,
     Login,
     Services,
-    Stats,
     Testimonial,
+    EditBlog,
+    EditService
 } from "./pages";
 import { action as loginAction } from "./pages/Login";
 
-import { action as addBookingAction } from "./pages/AddBooking";
-import { action as deleteBookingAction } from "./pages/DeleteBooking";
+import AddBooking, { action as addBookingAction } from "./pages/AddBooking";
+import AddService, { action as addServiceAction } from "./pages/AddService";
+import AddTestimonial, { action as addTestimonialAction } from "./pages/AddTestimonial";
+import { action as editTestimonialAction, loader as editTestimonialLoader } from "./pages/EditTestimonial";
+import { action as editServiceAction, loader as editServiceLoader } from "./pages/EditService";
+import DeleteBooking, { action as deleteBookingAction } from "./pages/DeleteBooking";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { loader as bookingsLoader } from "./pages/AllBookings";
-import { loader as editBookingLoader } from "./pages/EditBooking";
-import { action as editBookingAction } from "./pages/EditBooking";
-import AddBooking from "./pages/AddBooking";
-
+import AllTestimonial, { loader as testimonialsLoader } from "./pages/AllTestimonial";
+import { loader as editBookingLoader, action as editBookingAction } from "./pages/EditBooking";
+import { loader as editBlogLoader, action as editBlogAction } from "./pages/EditBlog";
+import { loader as servicesLoader } from "./pages/AllServices";
+import { action as addBlogAction} from "./pages/AddBlog";
+import { loader as blogsLoader } from "./pages/AllBlogs";
+import { loader as  homeTestimonialsLoader } from "./pages/Testimonial";
+import { loader as  homeServicesLoader } from "./pages/Services";
+import { loader as  homeBlogsLoader } from "./pages/Blog";
 
 const router = createBrowserRouter([
     {
@@ -50,14 +64,17 @@ const router = createBrowserRouter([
             {
                 path: "services",
                 element: <Services />,
+                loader:homeServicesLoader
             },
             {
                 path: "blogs",
                 element: <Blog />,
+                loader:homeBlogsLoader
             },
             {
                 path: "testimonials",
                 element: <Testimonial />,
+                loader: homeTestimonialsLoader
             },
             {
                 path: "booking",
@@ -80,19 +97,15 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <AddBooking />,
-                        action: addBookingAction,
-                    },
-                    // {
-                    //     path: "stats",
-                    //     element: <Stats />,
-                    //     loader: statsLoader,
-                    // },
-                    {
-                        path: "all-bookings",
                         element: <AllBookings />,
                         loader: bookingsLoader,
                     },
+                    {
+                        path: "add-booking",
+                        element: <AddBooking />,
+                        action: addBookingAction,
+                    },
+                   
                     {
                         path: "edit-booking/:id",
                         element: <EditBooking />,
@@ -101,8 +114,58 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "delete-booking/:id",
-                        element: <EditBooking />,
+                        element: <DeleteBooking />,
                         action: deleteBookingAction,
+                    },
+
+                    {
+                        path: "testimonials",
+                        element: <AllTestimonial />,
+                        loader: testimonialsLoader,
+                    },
+
+                    {
+                        path: "add-testimonial",
+                        element: <AddTestimonial />,
+                        action: addTestimonialAction,
+                    },
+                    {
+                        path: "edit-testimonial/:id",
+                        element: <EditTestimonial />,
+                        loader: editTestimonialLoader,
+                        action: editTestimonialAction,
+                    },
+                    {
+                        path: "services",
+                        element: <AllServices />,
+                        loader: servicesLoader,
+                    },
+                    {
+                        path: "add-service",
+                        element: <AddService />,
+                        action: addServiceAction,
+                    },
+                    {
+                        path: "edit-service/:id",
+                        element: <EditService />,
+                        loader: editServiceLoader,
+                        action: editServiceAction,
+                    },
+                    {
+                        path: "blogs",
+                        element: <AllBlogs />,
+                        loader: blogsLoader,
+                    },
+                    {
+                        path: "add-blog",
+                        element: <AddBlog />,
+                        action: addBlogAction,
+                    },
+                    {
+                        path: "edit-blog/:id",
+                        element: <EditBlog />,
+                        loader: editBlogLoader,
+                        action: editBlogAction,
                     },
                 ],
             },

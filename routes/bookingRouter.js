@@ -6,15 +6,15 @@ import {
     getSingleBooking,
     updateBooking,
 } from "../controllers/bookingController.js";
-import { validateBookingInput, validateIdParam } from "../middleware/validationMiddleware.js";
+import { validateBookingInput, validateBookingIdParam } from "../middleware/validationMiddleware.js";
 
 const router = Router();
 
 router.route("/").get(getAllBookings).post(validateBookingInput, createBooking);
 router
     .route("/:id")
-    .get(validateIdParam, getSingleBooking)
-    .delete(validateIdParam, deleteBooking)
-    .patch(validateIdParam, updateBooking);
+    .get(validateBookingIdParam, getSingleBooking)
+    .delete(validateBookingIdParam, deleteBooking)
+    .patch(validateBookingIdParam, updateBooking);
 
 export default router;

@@ -15,7 +15,7 @@ export const loader = async ({ params }) => {
       return data;
   } catch (error) {
       toast.error(error.response.data.msg);
-      return redirect("/dashboard/all-booking");
+      return redirect("/dashboard");
   }
 };
 
@@ -25,7 +25,7 @@ export const action = async ({ request, params }) => {
   try {
       await customFetch.patch(`/bookings/${params.id}`, data);
       toast.success("Updated job successfully!");
-      return redirect('/dashboard/all-booking');
+      return redirect('/dashboard');
   } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;

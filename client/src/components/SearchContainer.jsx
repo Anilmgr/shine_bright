@@ -8,7 +8,7 @@ import { useAllBookingsContext } from "../pages/AllBookings";
 
 const SearchContainer = () => {
     const { searchValues } = useAllBookingsContext();
-    const { search, bookingStatus, serviceType, sort } = searchValues;
+    const { search, bookingStatus, serviceType, sort, createdAt, preferredDate } = searchValues;
     const submit = useSubmit();
     const debounce = (onChange) => {
         let timeout;
@@ -60,9 +60,25 @@ const SearchContainer = () => {
                         }}
                         defaultValue={sort}
                     />
+                    <FormRow
+                        type="date"
+                        name="createdAt"
+                        defaultValue={createdAt}
+                        onChange={debounce((form) => {
+                            submit(form);
+                        })}
+                    />
+                    <FormRow
+                        type="date"
+                        name="preferredDate"
+                        defaultValue={preferredDate}
+                        onChange={debounce((form) => {
+                            submit(form);
+                        })}
+                    />
                     <Link
-                        to="/dashboard/all-bookings"
-                        className="btn form-btn delete-btn"
+                        to="/dashboard"
+                        className="btn btn-primary-custom form-btn delete-btn"
                     >
                         Reset Search Values
                     </Link>

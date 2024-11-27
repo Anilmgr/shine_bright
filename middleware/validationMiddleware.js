@@ -2,6 +2,9 @@ import { body, param, validationResult } from "express-validator";
 import { BadRequestError, NotFoundError, UnauthorizedError } from "../errors/customError.js";
 import { SERVICE_TYPE } from "../utils/constants.js";
 import Booking from "../models/BookingModel.js";
+import Testimonial from "../models/TestimonialModel.js";
+import Blog from "../models/BlogModel.js";
+import Service from "../models/ServiceModel.js";
 import mongoose from "mongoose";
 import User from "../models/UserModel.js";
 
@@ -10,6 +13,8 @@ const withValidationErrors = (validateValues) => {
     return [
         validateValues,
         (req, res, next) => {
+            console.log(req);
+            
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 const errorMessages = errors.array().map((error) => error.msg);
@@ -40,8 +45,8 @@ export const validateBookingInput = withValidationErrors([
     body("phone")
         .notEmpty()
         .withMessage("Phone is required!")
-        .matches(/^\d{10}$/)
-        .withMessage("Phone number must be 10 digits!"),
+        .matches(/^[+\d]?[0-9\s\-().]{9,}$/)
+        .withMessage("Invalid phone number format!"),
     body("serviceType")
         .isIn(Object.values(SERVICE_TYPE))
         .withMessage("Invalid service type!"),
@@ -57,11 +62,18 @@ export const validateBookingInput = withValidationErrors([
             }
             return true;
         }),
-    body("preferredTime")
+        body("preferredTime")
         .notEmpty()
         .withMessage("Preferred time is required!")
         .matches(/^([01]\d|2[0-3]):[0-5]\d$/)
-        .withMessage("Preferred time must be in HH:mm format (e.g., 14:30)"),
+        .withMessage("Preferred time must be in HH:mm format (e.g., 14:30)")
+        .custom((value) => {
+            const [hours, minutes] = value.split(":").map(Number);
+            if (hours < 8 || (hours === 18 && minutes > 0) || hours > 18) {
+                throw new Error("Preferred time must be between 08:00 and 18:00 (6 PM).");
+            }
+            return true;
+        }),    
     body("address")
         .notEmpty()
         .withMessage("Address is required!")
@@ -71,12 +83,75 @@ export const validateBookingInput = withValidationErrors([
         .trim(),
 ]);
 
-export const validateIdParam = withValidationErrors([
+export const validateBlogInput = withValidationErrors([
+    body("title")
+        .notEmpty()
+        .withMessage("Title is required!")
+        .trim(),
+    body("description")
+        .notEmpty()
+        .withMessage("Description is required!")
+        .trim()
+]);
+
+export const validateTestimonialInput = withValidationErrors([
+    body("name")
+        .notEmpty()
+        .withMessage("Name is required!")
+        .trim(),
+    body("feedback")
+        .notEmpty()
+        .withMessage("Feedback is required!")
+        .trim(),
+    body("serviceType")
+        .isIn(Object.values(SERVICE_TYPE))
+        .withMessage("Invalid service type!"),
+]);
+
+export const validateServiceInput = withValidationErrors([
+    body("title")
+        .notEmpty()
+        .withMessage("Title is required!")
+        .trim(),
+    body("description")
+        .notEmpty()
+        .withMessage("Description is required!")
+        .trim()
+]);
+
+export const validateBookingIdParam = withValidationErrors([
     param("id").custom(async (value,{req}) => {
         const isValidId = mongoose.Types.ObjectId.isValid(value);
-        if (!isValidId) throw new "Invalid MongoDB ID!"();
+        if (!isValidId) throw new Error("Invalid MongoDB ID!");
         const booking = await Booking.findById(value);
         if (!booking) throw new NotFoundError("Booking not found!");
+    }),
+]);
+
+export const validateTestimonialIdParam = withValidationErrors([
+    param("id").custom(async (value,{req}) => {
+        const isValidId = mongoose.Types.ObjectId.isValid(value);
+        if (!isValidId) throw new Error("Invalid MongoDB ID!");
+        const testimonial = await Testimonial.findById(value);
+        if (!testimonial) throw new NotFoundError("Testimonial not found!");
+    }),
+]);
+
+export const validateServiceIdParam = withValidationErrors([
+    param("id").custom(async (value,{req}) => {
+        const isValidId = mongoose.Types.ObjectId.isValid(value);
+        if (!isValidId) throw new Error("Invalid MongoDB ID!");
+        const service = await Service.findById(value);
+        if (!service) throw new NotFoundError("Service not found!");
+    }),
+]);
+
+export const validateBlogIdParam = withValidationErrors([
+    param("id").custom(async (value,{req}) => {
+        const isValidId = mongoose.Types.ObjectId.isValid(value);
+        if (!isValidId) throw new Error("Invalid MongoDB ID!");
+        const blog = await Blog.findById(value);
+        if (!blog) throw new NotFoundError("Blog not found!");
     }),
 ]);
 

@@ -5,7 +5,7 @@ import PageBtnContainer from "./PageBtnContainer";
 
 const BookingsContainer = () => {
     const { data } = useAllBookingsContext();
-    const { bookings, totalBookings, numOfPage, currentPage} = data;
+    const { bookings, totalBookings, numOfPage, currentPage } = data;
 
     if (bookings.length == 0) {
         return (
@@ -16,13 +16,21 @@ const BookingsContainer = () => {
     }
     return (
         <Wrapper>
-            <h5>{totalBookings} booking{bookings.length > 1 && 's'}</h5>
+            <h5>
+                {totalBookings} booking{bookings.length > 1 && "s"}
+            </h5>
             <div className="bookings">
-                {bookings.map((booking) => {
-                    return <Booking key={booking._id} {...booking} />;
-                })}
+                <div className="row">
+                    {bookings.map((booking, idx) => {
+                        return (
+                                <div className="col-md-6 col-lg-4" key={idx}>
+                                    <Booking key={booking._id} {...booking} />
+                                </div>
+                        );
+                    })}
+                </div>
             </div>
-            {numOfPage > 1 && <PageBtnContainer/>}
+            {numOfPage > 1 && <PageBtnContainer />}
         </Wrapper>
     );
 };

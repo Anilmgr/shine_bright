@@ -2,7 +2,7 @@ import Booking from "../models/BookingModel.js";
 import { StatusCodes } from "http-status-codes";
 
 export const getAllBookings = async (req, res) => {
-    const { search, serviceType, bookingStatus, sort } = req.query;
+    const { search, serviceType, bookingStatus, sort, createdAt, preferredDate } = req.query;
     const queryObject = {};
     if (search) {
         queryObject.$or = [
@@ -16,6 +16,26 @@ export const getAllBookings = async (req, res) => {
 
     if (bookingStatus && bookingStatus !== "all") {
         queryObject.bookingStatus = bookingStatus;
+    }
+
+    if (createdAt) {
+        const startOfDay = new Date(createdAt);
+        startOfDay.setHours(0, 0, 0, 0);
+    
+        const endOfDay = new Date(createdAt);
+        endOfDay.setHours(23, 59, 59, 999);
+    
+        queryObject.createdAt = { $gte: startOfDay, $lt: endOfDay };
+    }
+
+    if (preferredDate) {
+        const startOfDay = new Date(preferredDate);
+        startOfDay.setHours(0, 0, 0, 0);
+    
+        const endOfDay = new Date(preferredDate);
+        endOfDay.setHours(23, 59, 59, 999);
+    
+        queryObject.preferredDate = { $gte: startOfDay, $lt: endOfDay };
     }
 
     const sortOptions = {
