@@ -40,7 +40,7 @@ const Booking = ({
                 </div>
 
                 <footer className="actions p-3">
-                    <Link className="btn edit-btn btn-secondary mt-0" to={`../edit-booking/${_id}`}>Edit</Link>
+                    <Link className="btn edit-btn btn-secondary mt-0" to={`./edit-booking/${_id}`}>Edit</Link>
                     <Form method="post" action={`delete-booking/${_id}`} onSubmit={(e) => {
                                             if (
                                                 window.confirm(

@@ -23,7 +23,7 @@ const BookingsContainer = () => {
                 <div className="row">
                     {bookings.map((booking, idx) => {
                         return (
-                                <div className="col-md-6 col-lg-4" key={idx}>
+                                <div className="col-lg-6 col-xl-4" key={idx}>
                                     <Booking key={booking._id} {...booking} />
                                 </div>
                         );
