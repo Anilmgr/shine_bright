@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const API_URI = "https://shine-bright-api.onrender.com/api/v1";
+
 const customFetch = axios.create({
-    baseURL: '/api/v1'
+    url: API_URI
 })
 
 export default customFetch;
