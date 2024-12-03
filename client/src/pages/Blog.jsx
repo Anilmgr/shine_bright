@@ -18,7 +18,6 @@ export const loader = async ({ request }) => {
 const Blog = () => {
     const {data} = useLoaderData();
     const {blogs} = data;  
-    console.log(blogs)
   return (
     <>
       <Navbar/>
@@ -26,18 +25,18 @@ const Blog = () => {
       <main>
         <section className="testimonials py-5">
           <div className="container">
-            <div class="row mb-2">
+            <div className="row mb-2">
               {
                 blogs.map((blog,idx)=>{
-                  return  <div class="col-md-6" key={idx}>
-                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <h5 class="mb-0">{blog.title}</h5>
-                      <div class="mb-1 text-muted">Nov 12</div>
-                      <p class="card-text mb-auto">{blog.description.length > 80 ? `${blog.description.substring(0, 80)}...` : blog.description}</p>
-                      <a href="#" class="stretched-link">Continue reading</a>
+                  return  <div className="col-md-6" key={idx}>
+                  <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div className="col p-4 d-flex flex-column position-static">
+                      <h5 className="mb-0">{blog.title}</h5>
+                      <div className="mb-1 text-muted">Nov 12</div>
+                      <p className="card-text mb-auto">{blog.description.length > 80 ? `${blog.description.substring(0, 80)}...` : blog.description}</p>
+                      <a href="#" className="stretched-link">Continue reading</a>
                     </div>
-                    <div class="col-auto d-none d-lg-block">
+                    <div className="col-auto d-none d-lg-block">
                     {blog.featuredImage ? <img src={API_URI+blog.featuredImage.split('/').slice(1).join('/')} className="object-fit-cover" height="250" width="200" /> : '- - -'}
                     </div>
                   </div>
