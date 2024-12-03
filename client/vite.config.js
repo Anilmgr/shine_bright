@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
       proxy: {
           "/api": {
-              target: "https://shine-bright-api.onrender.com/api",
+              target: "https://shine-bright-api.onrender.com",
               changeOrigin: true,
               rewrite: (path) => path.replace(/^\/api/, ""),
           },

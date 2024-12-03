@@ -24,6 +24,10 @@ app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(cookieParser());
 app.use(express.json());
 
+
+app.options('*', cors()); // Handle preflight requests
+app.use(cors())
+
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
