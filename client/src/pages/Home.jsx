@@ -59,7 +59,7 @@ const Home = () => {
                             <div className="card-body">
                                 <h3 className="card-title">Residential Cleaning</h3>
                                 <p className="card-text">Keep your home spotless with our comprehensive cleaning services.</p>
-                                <a href="services.html#residential" className="btn btn-outline-primary-custom">Learn More</a>
+                                <a href="services.html#residential" className="btn btn-primary-custom">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ const Home = () => {
                             <div className="card-body">
                                 <h3 className="card-title">Commercial Cleaning</h3>
                                 <p className="card-text">Maintain a clean and professional environment for your business.</p>
-                                <a href="services.html#commercial" className="btn btn-outline-primary-custom">Learn More</a>
+                                <a href="services.html#commercial" className="btn btn-primary-custom">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ const Home = () => {
                             <div className="card-body">
                                 <h3 className="card-title">Deep Cleaning</h3>
                                 <p className="card-text">Thorough cleaning for those areas that need extra attention.</p>
-                                <a href="services.html#deep" className="btn btn-outline-primary-custom">Learn More</a>
+                                <a href="services.html#deep" className="btn btn-primary-custom">Learn More</a>
                             </div>
                         </div>
                     </div>
