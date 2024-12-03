@@ -19,4 +19,4 @@ export const BOOKING_STATUS = {
    FINISHED :"finished"
 };
 
-export const API_URI = "http://localhost:3000/";
+export const API_URI = "https://shine-bright-api.onrender.com/";

@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_URI } from "../../../utils/constants";
 
 const customFetch = axios.create({
-    baseURL: '/api/v1'
+    baseURL: API_URI+'api/v1'
 })
 
 export default customFetch;
