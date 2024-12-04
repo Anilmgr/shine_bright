@@ -7,7 +7,7 @@ import { API_URI } from "../../../utils/constants"
 
 export const loader = async ({ request }) => {
     try {
-        const { data } = await customFetch.get("/services");
+        const { data } = await customFetch.get("/api/v1/services");
         return { data };
     } catch (error) {
         toast.error(error?.response?.data?.message);

@@ -10,7 +10,7 @@ export const action = async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-        await customFetch.post("/bookings", data);
+        await customFetch.post("/api/v1/bookings", data);
         toast.success("Booking made successfully!");
         return { success: true };
     } catch (error) {

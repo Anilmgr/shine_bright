@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom"
 
 export const loader = async ({ request }) => {
     try {
-        const { data } = await customFetch.get("/blogs");
+        const { data } = await customFetch.get("/api/v1/blogs");
         return { data };
     } catch (error) {
         toast.error(error?.response?.data?.message);

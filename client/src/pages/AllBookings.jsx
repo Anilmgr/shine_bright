@@ -9,7 +9,7 @@ export const loader = async ({ request }) => {
         ...new URL(request.url).searchParams.entries() 
     ])    
     try {
-        const { data } = await customFetch.get("/bookings",{params});
+        const { data } = await customFetch.get("/api/v1/bookings",{params});
         return { data, searchValues:params };
     } catch (error) {
         toast.error(error?.response?.data?.message);

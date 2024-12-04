@@ -8,7 +8,7 @@ import { FaPenToSquare } from "react-icons/fa6";
 
 export const loader = async ({ request }) => {
     try {
-        const { data } = await customFetch.get("/testimonials");
+        const { data } = await customFetch.get("/api/v1/testimonials");
         return { data };
     } catch (error) {
         toast.error(error?.response?.data?.message);

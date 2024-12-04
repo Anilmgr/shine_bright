@@ -11,7 +11,7 @@ export const action = async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-        await customFetch.post("/testimonials", data);
+        await customFetch.post("/api/v1/testimonials", data);
         toast.success("Saved testimonial successfully!");
         return { success: true };
     } catch (error) {

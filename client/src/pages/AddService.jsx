@@ -12,7 +12,7 @@ export const action = async ({request}) => {
       return null
     }
     try {
-        await customFetch.post("/services", formData);
+        await customFetch.post("/api/v1/services", formData);
         toast.success("Saved service successfully!");
         return null;
     } catch (error) {

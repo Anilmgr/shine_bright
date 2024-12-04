@@ -22,7 +22,7 @@ export const action = async ({request}) => {
       return null
     }
     try {
-        await customFetch.patch("/services", formData);
+        await customFetch.get("/api/v1/services", formData);
         toast.success("Saved service successfully!");
         return null;
     } catch (error) {

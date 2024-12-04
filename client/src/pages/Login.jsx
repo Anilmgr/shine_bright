@@ -8,7 +8,9 @@ export const action = async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-        await customFetch.post("/auth/login", data);
+        const response = await customFetch.post("/api/v1/auth/login", data);
+        console.log(response);
+        
         toast.success("Login successful!");
         return redirect("/dashboard");
     } catch (error) {
