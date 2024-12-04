@@ -11,7 +11,7 @@ export default function LogoutContainer() {
         <Wrapper>
             <button
                 type="button"
-                className="btn logout-btn"
+                className="btn btn-primary-custom"
                 onClick={() => setShowLogout(!showLogout)}
             >
  
