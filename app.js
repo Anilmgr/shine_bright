@@ -25,10 +25,14 @@ app.use(cookieParser());
 app.use(express.json());
 
 
-app.options('*', cors()); // Handle preflight requests
-app.use(cors({
-    credentials:true
-}))
+const corsOptions = {
+    origin: ["http://localhost:5173","https://shine-bright.onrender.com"],// Allow your frontend origin
+    credentials: true, // Allow cookies and credentials
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
+
+app.use(cors(corsOptions));
 
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
