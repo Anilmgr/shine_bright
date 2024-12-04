@@ -32,7 +32,7 @@ export const login = async (req, res) => {
         sameSite: 'None'
     });
 
-    res.json({ message: 'Logged in successfully!' });
+    res.status(StatusCodes.OK).json({ message: 'Logged in successfully!' });
 };
 
 export const logout = async (req,res)=>{
