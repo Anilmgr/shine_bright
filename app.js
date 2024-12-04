@@ -51,9 +51,9 @@ app.use("/api/v1/users", authenticatedUser, userRouter);
 
 app.use("/api/v1/auth", authRouter);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
-  });
+app.use("/", (req, res)=>{
+    res.send("Shine Bright Services API")
+});
 
 app.use("*", (req, res) => {
     res.status(404).json({ message: "Requested uri not found" });
