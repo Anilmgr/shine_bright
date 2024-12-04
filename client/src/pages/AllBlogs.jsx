@@ -23,7 +23,7 @@ const AllBlogs = () => {
 
     const deleteHandler = async (id) => {
         try {
-            await customFetch.delete(`/blogs/${id}`);
+            await customFetch.delete(`/api/v1/blogs/${id}`);
             toast.success("Deleted booking successfully!");
             setBlogs((prev) =>
                 prev.filter((blog) => blog._id !== id)

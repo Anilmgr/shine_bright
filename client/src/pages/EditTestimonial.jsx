@@ -8,7 +8,7 @@ import { SERVICE_TYPE } from "../../../utils/constants";
 
 export const loader = async ({ params }) => {
     try {
-        const { data } = await customFetch.get(`/testimonials/${params.id}`);
+        const { data } = await customFetch.get(`/api/v1/testimonials/${params.id}`);
         return data;
     } catch (error) {
         toast.error(error.response.data.msg);
@@ -20,7 +20,7 @@ export const action = async ({ request, params }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-        await customFetch.patch(`/testimonials/${params.id}`, data);
+        await customFetch.patch(`/api/v1/testimonials/${params.id}`, data);
         toast.success("Updated testimonial successfully!");
         return { success: true };
     } catch (error) {

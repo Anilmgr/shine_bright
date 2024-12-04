@@ -30,7 +30,7 @@ const AllTestimonial = () => {
 
     const deleteHandler = async (id) => {
         try {
-            await customFetch.delete(`/testimonials/${id}`);
+            await customFetch.delete(`/api/v1/testimonials/${id}`);
             toast.success("Deleted booking successfully!");
             setTestimonials((prev) =>
                 prev.filter((testimonial) => testimonial._id !== id)

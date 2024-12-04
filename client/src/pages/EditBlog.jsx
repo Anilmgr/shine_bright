@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 export const loader = async ({ params }) => {
     try {
-        const { data } = await customFetch.get(`/blogs/${params.id}`);
+        const { data } = await customFetch.get(`/api/v1/blogs/${params.id}`);
         return data;
     } catch (error) {
         toast.error(error.response.data.msg);
@@ -23,7 +23,7 @@ export const action = async ({ request, params }) => {
         return null;
     }
     try {
-        await customFetch.patch(`/blogs/${params.id}`, formData);
+        await customFetch.patch(`/api/v1/blogs/${params.id}`, formData);
         toast.success("Saved blog successfully!");
         return null;
     } catch (error) {

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 export const loader = async ({ params }) => {
     try {
-        const { data } = await customFetch.get(`/services/${params.id}`);
+        const { data } = await customFetch.get(`/api/v1/services/${params.id}`);
         return data;
     } catch (error) {
         toast.error(error.response.data.msg);

@@ -31,7 +31,7 @@ const AllServices = () => {
 
     const deleteHandler = async (id) => {
         try {
-            await customFetch.delete(`/services/${id}`);
+            await customFetch.delete(`/api/v1/services/${id}`);
             toast.success("Deleted booking successfully!");
             setServices((prev) =>
                 prev.filter((service) => service._id !== id)

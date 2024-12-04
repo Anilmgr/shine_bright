@@ -6,7 +6,7 @@ export const action = async ({ request, params }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-      await customFetch.delete(`/bookings/${params.id}`, data);
+      await customFetch.delete(`/api/v1/bookings/${params.id}`, data);
       toast.success("Deleted booking successfully!");
   } catch (error) {
       toast.error(error?.response?.data?.message);

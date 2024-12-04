@@ -11,7 +11,7 @@ day.extend(advancedFormat);
 
 export const loader = async ({ params }) => {
   try {
-      const { data } = await customFetch.get(`/bookings/${params.id}`);
+      const { data } = await customFetch.get(`/api/v1/bookings/${params.id}`);
       return data;
   } catch (error) {
       toast.error(error.response.data.msg);
@@ -23,7 +23,7 @@ export const action = async ({ request, params }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-      await customFetch.patch(`/bookings/${params.id}`, data);
+      await customFetch.patch(`/api/v1/bookings/${params.id}`, data);
       toast.success("Updated job successfully!");
       return redirect('/dashboard');
   } catch (error) {
