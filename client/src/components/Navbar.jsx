@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { RiAdminFill } from "react-icons/ri";
 import Logo from "./Logo"
 
 const Navbar = () => {
@@ -33,6 +34,9 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                     <Link to='/booking' className="nav-link btn btn-primary-custom  text-white m-0">Book Now</Link>
+                    </li>
+                    <li>
+                        <Link to='/login' className="nav-link" ><RiAdminFill /></Link>
                     </li>
                 </ul>
             </div>
